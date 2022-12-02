@@ -1,5 +1,5 @@
 runner = $(shell whoami)
-
+MAKEFLAGS += --no-print-directory
 .DEFAULT_GOAL=all
 
 .PHONY: clean all \
@@ -22,15 +22,18 @@ endif
 
 # Gtest -----------------------------------
 
+GTEST_DIR=gtest/
+GTEST_BUILD_DIR=gtest/build/
+
 gtest: gtest_clean
 	@echo Build gtest
-	@cmake -S ./gtest/ -B build -DBUILD_SHARED_LIBS=ON -DINSTALL_GTEST=ON -DCMAKE_INSTALL_PREFIX:PATH=/usr
-	@cmake --build build
+	@cmake -S ./$(GTEST_DIR) -B ./$(GTEST_BUILD_DIR) -DBUILD_SHARED_LIBS=ON -DINSTALL_GTEST=ON -DCMAKE_INSTALL_PREFIX:PATH=/usr
+	@cmake --build ./$(GTEST_BUILD_DIR)
 
 gtest_install: check_runner
 	@echo Install gtest
-	@cmake -S ./gtest/ --install build
+	@cmake -S ./$(GTEST_DIR) --install ./$(GTEST_BUILD_DIR)
 
 gtest_clean:
 	@echo Clean gtest
-	@rm -rf ./gtest/build
+	@rm -rf ./$(GTEST_BUILD_DIR)
