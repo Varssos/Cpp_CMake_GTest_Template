@@ -33,4 +33,4 @@ gtest_install: check_runner
 
 gtest_clean:
 	@echo Clean gtest
-	@cmake -S ./gtest/ --clean build
+	@rm -rf ./gtest/build
