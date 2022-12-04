@@ -4,6 +4,15 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "generate_build_system",
+            "type": "shell",
+            "options": {
+                    "cwd": "${workspaceRoot}"
+            },
+            "command": "cmake -B build -DCMAKE_BUILD_TYPE=Debug -DTESTS=True",
+            "problemMatcher": []
+        },
+        {
             "label": "build",
             "type": "shell",
             "options": {
@@ -31,7 +40,7 @@
             "problemMatcher": []
         },
         {
-            "label": "run",
+            "label": "run_app",
             "type": "shell",
             "options": {
                     "cwd": "${workspaceRoot}"
@@ -40,7 +49,7 @@
             "problemMatcher": []
         },
         {
-            "label": "build_and_run",
+            "label": "build_run_app",
             "type": "shell",
             "options": {
                     "cwd": "${workspaceRoot}"
