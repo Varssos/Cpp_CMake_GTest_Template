@@ -30,7 +30,7 @@ jobs:
           git submodule init
           git submodule update
           make -C submodules
-          sudo make -C submodules install
+#sudo make -C submodules install
 
       - name: Build app
         run: cmake -B build -DCMAKE_BUILD_TYPE=Release -DTESTS=True; cmake --build build
