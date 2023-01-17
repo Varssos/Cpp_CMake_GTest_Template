@@ -1,5 +1,5 @@
 # Name of your workflow
-name: My Test Workflow
+name: Cpp CMake GTest Template workflow
 
 # Define the trigger event(s)
 on: [push]
@@ -8,42 +8,45 @@ on: [push]
 jobs: 
 
   # Jobs to print something out
-  say-hello:
+  install-dependencies:
     runs-on: ubuntu-latest
     steps:
-      - name: Say hello
-        run: echo "Hello, GitHub Actions!"
+      - name: Install dependencies
+        run: sudo apt install -y build-essential python3
 
-  check-cmake:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check cmake install
-        run: echo $(cmake --version)
+  # install-gtest:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Install gtest
+  #       run: |
+  #         git submodule init
+  #         git submodule update
+  #         make -C submodules
+  #         sudo make -C submodules install
 
   # Job to build and test our template code
-  build-and-test:
-    needs: [say-hello]
-    runs-on: ubuntu-20.04
+  build-app:
+    needs: [install-dependencies]
+    runs-on: ubuntu-latest
     steps:
       - name: Check out this repo
         uses: actions/checkout@v3
 
-      - name: Install dependencies
-        run: sudo apt install -y build-essential python3
-
-      # - name: Install gtest
-      #   run: |
-      #     git submodule init
-      #     git submodule update
-      #     make -C submodules
-      #     sudo make -C submodules install
-
       - name: Build app
         run: cmake -B build -DCMAKE_BUILD_TYPE=Release -DTESTS=False; cmake --build build
 
-      # Right now can't run unit tests due to problem with building 
+  run-app:
+    needs: [build-app]
+    runs-on: ubuntu-latest
+    steps:
       - name: Run app
         run: ./build/app
       
-      # - name: Run unit tests
-      #   run: ./build/tests
+  
+  # Right now can't run unit tests due to problem with building 
+  # run-unit-tests:
+  #   needs: [build-app]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Run unit tests
+  #       run: ./build/tests
