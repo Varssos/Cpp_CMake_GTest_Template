@@ -11,6 +11,9 @@ jobs:
   build-test-app:
     runs-on: ubuntu-latest
     steps:
+      - name: Check out this repo
+        uses: actions/checkout@v3
+        
       - name: Install dependencies
         run: sudo apt install -y build-essential python3
 
@@ -20,9 +23,6 @@ jobs:
           git submodule update
           make -C submodules
           sudo make -C submodules install
-
-      - name: Check out this repo
-        uses: actions/checkout@v3
 
       - name: Build app
         run: cmake -B build -DCMAKE_BUILD_TYPE=Release -DTESTS=True; cmake --build build
