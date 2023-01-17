@@ -25,7 +25,12 @@ jobs:
       - name: Install dependencies
         run: sudo apt install -y build-essential python3
 
-      - run: pwd
+      - name: Install gtest
+        run: |
+          git submodule init
+          git submodule update
+          make -C submodules
+          sudo make -C submodules install
 
       - name: Build app
-        run: cmake -B build; cmake --build build
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release -DTESTS=True; cmake --build build
