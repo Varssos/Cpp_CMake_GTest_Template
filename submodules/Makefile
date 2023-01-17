@@ -1,4 +1,5 @@
 runner = $(shell whoami)
+submodules_dir = $(shell pwd)
 MAKEFLAGS += --no-print-directory
 .DEFAULT_GOAL=all
 
@@ -27,13 +28,13 @@ GTEST_BUILD_DIR=gtest/build/
 
 gtest: gtest_clean
 	@echo Build gtest
-	@cmake -S ./$(GTEST_DIR) -B ./$(GTEST_BUILD_DIR) -DBUILD_SHARED_LIBS=ON -DINSTALL_GTEST=ON -DCMAKE_INSTALL_PREFIX:PATH=/usr
-	@cmake --build ./$(GTEST_BUILD_DIR)
+	@cmake -S $(submodules_dir)/$(GTEST_DIR) -B $(submodules_dir)/$(GTEST_BUILD_DIR) -DBUILD_SHARED_LIBS=ON -DINSTALL_GTEST=ON -DCMAKE_INSTALL_PREFIX:PATH=/usr
+	@cmake --build $(submodules_dir)/$(GTEST_BUILD_DIR)
 
 gtest_install: check_runner
 	@echo Install gtest
-	@cmake -S ./$(GTEST_DIR) --install ./$(GTEST_BUILD_DIR)
+	@cmake -S $(submodules_dir)/$(GTEST_DIR) --install $(submodules_dir)/$(GTEST_BUILD_DIR)
 
 gtest_clean:
 	@echo Clean gtest
-	@rm -rf ./$(GTEST_BUILD_DIR)
+	@rm -rf $(submodules_dir)/$(GTEST_BUILD_DIR)
