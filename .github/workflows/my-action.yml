@@ -8,45 +8,29 @@ on: [push]
 jobs: 
 
   # Jobs to print something out
-  install-dependencies:
+  build-test-app:
     runs-on: ubuntu-latest
     steps:
       - name: Install dependencies
         run: sudo apt install -y build-essential python3
 
-  # install-gtest:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Install gtest
-  #       run: |
-  #         git submodule init
-  #         git submodule update
-  #         make -C submodules
-  #         sudo make -C submodules install
+      # - name: Install gtest
+      #   run: |
+      #     git submodule init
+      #     git submodule update
+      #     make -C submodules
+      #     sudo make -C submodules install
 
-  # Job to build and test our template code
-  build-app:
-    needs: [install-dependencies]
-    runs-on: ubuntu-latest
-    steps:
       - name: Check out this repo
         uses: actions/checkout@v3
 
       - name: Build app
         run: cmake -B build -DCMAKE_BUILD_TYPE=Release -DTESTS=False; cmake --build build
 
-  run-app:
-    needs: [build-app]
-    runs-on: ubuntu-latest
-    steps:
       - name: Run app
         run: ./build/app
       
   
   # Right now can't run unit tests due to problem with building 
-  # run-unit-tests:
-  #   needs: [build-app]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Run unit tests
-  #       run: ./build/tests
+      # - name: Run unit tests
+      #   run: ./build/tests
