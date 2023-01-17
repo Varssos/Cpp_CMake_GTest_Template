@@ -32,7 +32,7 @@ gtest: gtest_clean
 
 gtest_install: check_runner
 	@echo Install gtest
-	@cmake -S ./$(GTEST_DIR) --install ./$(GTEST_BUILD_DIR)
+	@cmake --install ./$(GTEST_BUILD_DIR)
 
 gtest_clean:
 	@echo Clean gtest

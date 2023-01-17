@@ -14,23 +14,22 @@ jobs:
       - name: Install dependencies
         run: sudo apt install -y build-essential python3
 
-      # - name: Install gtest
-      #   run: |
-      #     git submodule init
-      #     git submodule update
-      #     make -C submodules
-      #     sudo make -C submodules install
+      - name: Install gtest
+        run: |
+          git submodule init
+          git submodule update
+          make -C submodules
+          sudo make -C submodules install
 
       - name: Check out this repo
         uses: actions/checkout@v3
 
       - name: Build app
-        run: cmake -B build -DCMAKE_BUILD_TYPE=Release -DTESTS=False; cmake --build build
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release -DTESTS=True; cmake --build build
 
       - name: Run app
         run: ./build/app
       
-  
   # Right now can't run unit tests due to problem with building 
-      # - name: Run unit tests
-      #   run: ./build/tests
+      - name: Run unit tests
+        run: ./build/tests
