@@ -14,10 +14,16 @@ jobs:
       - name: Say hello
         run: echo "Hello, GitHub Actions!"
 
+  check-cmake:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check cmake install
+        run: echo $(cmake --help | grep install)
+
   # Job to build and test our template code
   build-and-test:
     needs: [say-hello]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Check out this repo
         uses: actions/checkout@v3
