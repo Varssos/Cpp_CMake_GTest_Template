@@ -6,5 +6,7 @@ int main()
 {
     A a;
 
+    std::cout << "It works" << std::endl;
+
     return 0;
 }
