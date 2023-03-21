@@ -2,8 +2,7 @@
 
 # Requirements
 sudo apt update && sudo apt upgrade -y
-sudo apt install build-essential
-sudo apt install cmake
+sudo apt install -y build-essential cmake 
 
 gcc --version
 g++ --version
