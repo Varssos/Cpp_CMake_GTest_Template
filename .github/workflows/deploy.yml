@@ -39,7 +39,7 @@ jobs:
         run: echo "app_name=$APP_NAME" >> $GITHUB_ENV
 
       - name: Push to release
-        uses: softptops/action-gh-release@v1
+        uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: ${{ env.app_name }}
