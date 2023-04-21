@@ -1,12 +1,13 @@
 #include "app/app.hpp"
-#include "device/device.hpp"
 #include "config/config.hpp"
+#include "device/device.hpp"
+#include <iostream>
+#include <fmt/core.h>
 
 int main()
 {
-    A a;
-
-    std::cout << "It works" << std::endl;
-
+    std::cout << "Hello world" << std::endl;
+    fmt::print("Hello, world!\n");
+    
     return 0;
 }

@@ -12,7 +12,9 @@ My C++ project configuration
 
 ### 2.1 List of dependencies
 
-- gtest https://github.com/google/googletest
+- [gtest](https://github.com/google/googletest)
+- [fmt](https://github.com/fmtlib/fmt)
+
 
 ### 2.2 Build of dependencies
 

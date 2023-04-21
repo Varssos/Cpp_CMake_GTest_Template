@@ -2,6 +2,7 @@ set( TARGET_NAME app )
 
 list(APPEND MODULE_DEPS
     -pthread
+    -lfmt
     )
 
 
